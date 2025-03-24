@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Baskervville:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+
+.detailUbytovani {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
+
+
+
+
+
+.btnHotel {
+  width: 160px;
+  height: 50px;
+  border-radius: 25px;
+  box-shadow: 0px 4px 4px 0px rgba(138, 82, 47);
+  background-color: #FBE3BD;
+  font-family: "Newsreader";
+  font-size: 20px;
+  letter-spacing: 6px;
+  border: 0.5px solid #B57865;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  color: #4B574D;
+  margin-top: 10px;
+}
+
+.textUbytovani {
+  text-align: center;
+  font-size: 18px;
+  /* Velikost písma, upravit podle potřeby */
+  margin-left: 30px;
+  /* Nastaví automatické okraje pro lepší vycentrování */
+  max-width: 700px;
+  margin-top: 20px;
+}
+
+.druhyOdstavec {
+  text-align: center;
+  font-size: 18px;
+  /* Velikost písma, upravit podle potřeby */
+  margin-left: 30px;
+  /* Nastaví automatické okraje pro lepší vycentrování */
+  max-width: 700px;
+  margin-top: 20px;
+}
