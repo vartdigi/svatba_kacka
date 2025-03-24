@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Program.css';
 
 export const Program = () => {
-  // Počty hlasů pro každou možnost
-  const [votes, setVotes] = useState({
-    prijezd: { obrad: 0, party: 0, celyDen: 0, neprijdu: 0 },
-    spani: { ne: 0, autoStan: 0, zaplatim: 0 },
-    jidlo: { vegetarian: 0 },
+  // Počty hlasů pro každou možnost (při načítání stránka použije hodnoty z localStorage)
+  const [votes, setVotes] = useState(() => {
+    const savedVotes = localStorage.getItem('votes');
+    return savedVotes
+      ? JSON.parse(savedVotes)
+      : {
+          prijezd: { obrad: 0, party: 0, celyDen: 0, neprijdu: 0 },
+          spani: { ne: 0, autoStan: 0, zaplatim: 0 },
+          jidlo: { vegetarian: 0 },
+        };
   });
 
-  // Funkce pro zvýšení počtu hlasu pro vybranou možnost
+  // Funkce pro zvýšení počtu hlasů pro vybranou možnost a uložení do localStorage
   const handleVote = (category, option) => {
     setVotes((prevVotes) => {
       const newVotes = { ...prevVotes };
       newVotes[category][option]++;
+      localStorage.setItem('votes', JSON.stringify(newVotes)); // Uložení nového stavu do localStorage
       return newVotes;
     });
   };
