@@ -1,16 +1,18 @@
 require('dotenv').config(); // Načte proměnné z .env souboru
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const cors = require('cors'); // Tady už je jednou deklarováno
 const app = express();
 
 // CORS konfigurace
 const corsOptions = {
-  origin: 'http://localhost:5173', // Nastav správně svou frontendovou URL (pokud je to React, tak typicky localhost:3000)
+  origin: 'http://localhost:5137', // Ujisti se, že máš správně nastavený port frontendu
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true, // Pokud používáš cookies nebo autentizaci
 };
+
+// Aplikování CORS middleware na celý server
 app.use(cors(corsOptions));
 
 // Povolíme serveru zpracovávat JSON data
