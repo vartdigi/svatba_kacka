@@ -1,12 +1,17 @@
-// server.js
 require('dotenv').config(); // Načte proměnné z .env souboru
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
-// Umožníme připojení mezi frontendem a backendem (CORS)
-app.use(cors());
+// CORS konfigurace
+const corsOptions = {
+  origin: 'http://localhost:3000', // Nastav správně svou frontendovou URL (pokud je to React, tak typicky localhost:3000)
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true, // Pokud používáš cookies nebo autentizaci
+};
+app.use(cors(corsOptions));
 
 // Povolíme serveru zpracovávat JSON data
 app.use(express.json());
