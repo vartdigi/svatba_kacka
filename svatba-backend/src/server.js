@@ -1,10 +1,11 @@
-require('dotenv').config(); // Načte proměnné z .env souboru
+require('dotenv').config({ path: './src/.env' }); // Načte proměnné z .env souboru
 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const mongoUri = process.env.MONGO_URI;
-
+console.log('Mongo URI:', process.env.MONGO_URI);
+console.log('Environment Variables:', process.env);
 mongoose
   .connect(mongoUri, {
     useNewUrlParser: true,
