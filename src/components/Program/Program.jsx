@@ -25,7 +25,7 @@ export const Program = () => {
 
   // Načítání hlasů z backendu
   useEffect(() => {
-    fetch('http://localhost:5001/votes')
+    fetch('https://holeckovi.netlify.app/.netlify/functions/my-api')
       .then((response) => response.json())
       .then((data) => {
         setVotes(data);
