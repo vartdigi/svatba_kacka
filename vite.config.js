@@ -6,6 +6,7 @@ export default defineConfig({
   publicDir: '../public',
   server: {
     hmr: false,
+    host: true, // Tohle přidáme pro veřejnou IP
   },
   build: {
     outDir: '../dist',
