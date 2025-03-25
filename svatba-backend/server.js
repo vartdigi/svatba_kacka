@@ -1,25 +1,10 @@
 // server.js
+require('dotenv').config(); // Načte proměnné z .env souboru
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
-const handleVote = (category, option) => {
-  // Odeslání volby na backend
-  fetch('http://localhost:5001/votes', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ category, option }),
-  })
-    .then((response) => response.json())
-    .then((updatedVotes) => {
-      setVotes(updatedVotes); // Aktualizace stavových dat
-    })
-    .catch((error) => {
-      console.error('Error updating vote:', error);
-    });
-};
+
 // Umožníme připojení mezi frontendem a backendem (CORS)
 app.use(cors());
 
@@ -28,13 +13,12 @@ app.use(express.json());
 
 // Připojení k databázi (MongoDB)
 mongoose
-  .connect('mongodb://localhost:27017/svatba')
-  .then(() => {
-    console.log('Connected to MongoDB');
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch((err) => {
-    console.error('Error connecting to MongoDB', err);
-  });
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('Error connecting to MongoDB', err));
 
 // Model pro ukládání hlasů
 const voteSchema = new mongoose.Schema({
@@ -93,7 +77,7 @@ app.post('/votes', async (req, res) => {
 });
 
 // Spuštění serveru
-const port = 5001;
+const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
