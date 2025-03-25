@@ -4,15 +4,14 @@ const mongoose = require('mongoose');
 const cors = require('cors'); // Tady už je jednou deklarováno
 const app = express();
 
-// CORS konfigurace
 const corsOptions = {
-  origin: 'http://localhost:5173', // Ujisti se, že máš správně nastavený port frontendu
+  origin: ['http://localhost:5173', 'https://holeckovi.netlify.app'], // Povolit jak lokální frontend, tak Netlify
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
-  credentials: true, // Pokud používáš cookies nebo autentizaci
+  credentials: true,
 };
 
-// Aplikování CORS middleware na celý server
+// Aplikování CORS middleware
 app.use(cors(corsOptions));
 
 // Povolíme serveru zpracovávat JSON data
