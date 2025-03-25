@@ -7,7 +7,8 @@ export const Program = () => {
 
   // Funkce pro hlasování
   const handleVote = (category, option) => {
-    fetch('http://localhost:5001/votes', {
+    fetch('/votes', {
+      // Používáme relativní cestu, protože proxy v package.json to přesměruje na backend
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ export const Program = () => {
 
   // Načítání hlasů z backendu
   useEffect(() => {
-    fetch('http://localhost:5001/votes')
+    fetch('/votes') // Používáme relativní cestu pro GET požadavek
       .then((response) => response.json())
       .then((data) => {
         setVotes(data);
