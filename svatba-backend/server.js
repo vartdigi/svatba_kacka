@@ -6,7 +6,7 @@ const app = express();
 
 // CORS konfigurace
 const corsOptions = {
-  origin: 'http://localhost:3000', // Nastav správně svou frontendovou URL (pokud je to React, tak typicky localhost:3000)
+  origin: 'http://localhost:5173', // Nastav správně svou frontendovou URL (pokud je to React, tak typicky localhost:3000)
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true, // Pokud používáš cookies nebo autentizaci
