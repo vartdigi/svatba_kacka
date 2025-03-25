@@ -77,7 +77,7 @@ app.post('/votes', async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 10000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
