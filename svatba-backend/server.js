@@ -1,23 +1,21 @@
 require('dotenv').config(); // Načte proměnné z .env souboru
+
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Tady už je jednou deklarováno
+const cors = require('cors');
+
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://holeckovi.netlify.app'], // Povolit jak lokální frontend, tak Netlify
+  origin: ['http://localhost:5173', 'https://holeckovi.netlify.app'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true,
 };
 
-// Aplikování CORS middleware
 app.use(cors(corsOptions));
-
-// Povolíme serveru zpracovávat JSON data
 app.use(express.json());
 
-// Připojení k databázi (MongoDB)
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -26,7 +24,6 @@ mongoose
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('Error connecting to MongoDB', err));
 
-// Model pro ukládání hlasů
 const voteSchema = new mongoose.Schema({
   prijezd: {
     obrad: Number,
@@ -46,7 +43,6 @@ const voteSchema = new mongoose.Schema({
 
 const Vote = mongoose.model('Vote', voteSchema);
 
-// API endpoint pro získání aktuálních výsledků hlasování
 app.get('/votes', async (req, res) => {
   try {
     const voteResults = await Vote.findOne({});
@@ -65,7 +61,6 @@ app.get('/votes', async (req, res) => {
   }
 });
 
-// API endpoint pro aktualizaci hlasů
 app.post('/votes', async (req, res) => {
   const { category, option } = req.body;
 
@@ -82,7 +77,6 @@ app.post('/votes', async (req, res) => {
   }
 });
 
-// Spuštění serveru
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
