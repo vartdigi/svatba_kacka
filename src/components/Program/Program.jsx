@@ -7,7 +7,7 @@ export const Program = () => {
 
   // Funkce pro hlasování
   const handleVote = (category, option) => {
-    fetch('http://localhost:5001/votes', {
+    fetch('https://holeckovi.netlify.app/.netlify/functions/my-api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
