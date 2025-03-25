@@ -7,7 +7,7 @@ export const Program = () => {
 
   // Funkce pro hlasování
   const handleVote = (category, option) => {
-    fetch('https://holeckovi.netlify.app/.netlify/functions/my-api', {
+    fetch('https://holeckovi.netlify.app', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export const Program = () => {
 
   // Načítání hlasů z backendu
   useEffect(() => {
-    fetch('https://holeckovi.netlify.app/.netlify/functions/my-api')
+    fetch('https://holeckovi.netlify.app')
       .then((response) => response.json())
       .then((data) => {
         setVotes(data);
