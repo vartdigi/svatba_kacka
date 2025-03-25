@@ -1,28 +1,49 @@
-import React, { useState, useEffect } from 'react';
 import './Program.css';
+import { useState, useEffect } from 'react';
 
 export const Program = () => {
-  // Počty hlasů pro každou možnost (při načítání stránka použije hodnoty z localStorage)
-  const [votes, setVotes] = useState(() => {
-    const savedVotes = localStorage.getItem('votes');
-    return savedVotes
-      ? JSON.parse(savedVotes)
-      : {
-          prijezd: { obrad: 0, party: 0, celyDen: 0, neprijdu: 0 },
-          spani: { ne: 0, autoStan: 0, zaplatim: 0 },
-          jidlo: { vegetarian: 0 },
-        };
-  });
+  const [votes, setVotes] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Funkce pro zvýšení počtu hlasů pro vybranou možnost a uložení do localStorage
+  // Funkce pro hlasování
   const handleVote = (category, option) => {
-    setVotes((prevVotes) => {
-      const newVotes = { ...prevVotes };
-      newVotes[category][option]++;
-      localStorage.setItem('votes', JSON.stringify(newVotes)); // Uložení nového stavu do localStorage
-      return newVotes;
-    });
+    fetch('http://localhost:5001/votes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ category, option }),
+    })
+      .then((response) => response.json())
+      .then((updatedVotes) => {
+        setVotes(updatedVotes); // Aktualizace stavu s novými hodnotami hlasů
+      })
+      .catch((error) => {
+        console.error('Error updating vote:', error);
+      });
   };
+
+  // Načítání hlasů z backendu
+  useEffect(() => {
+    fetch('http://localhost:5001/votes')
+      .then((response) => response.json())
+      .then((data) => {
+        setVotes(data);
+        setLoading(false); // Nastavíme loading na false po načtení dat
+      })
+      .catch((error) => {
+        console.error('Error fetching votes:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Načítám data...</div>;
+  }
+
+  if (!votes) {
+    return <div>Nepodařilo se načíst hlasování.</div>;
+  }
 
   return (
     <section id="Tabulka">
@@ -35,22 +56,30 @@ export const Program = () => {
           <div className="options">
             <div className="option">
               <button onClick={() => handleVote('prijezd', 'obrad')}>
-                Přijedu jen na obřad ({votes.prijezd.obrad})
+                {votes.prijezd
+                  ? `Přijedu jen na obřad (${votes.prijezd.obrad})`
+                  : 'Načítání...'}
               </button>
             </div>
             <div className="option">
               <button onClick={() => handleVote('prijezd', 'party')}>
-                Přijedu až na párty od 16:00 ({votes.prijezd.party})
+                {votes.prijezd
+                  ? `Přijedu až na párty od 16:00 (${votes.prijezd.party})`
+                  : 'Načítání...'}
               </button>
             </div>
             <div className="option">
               <button onClick={() => handleVote('prijezd', 'celyDen')}>
-                Přijedu na celý den ({votes.prijezd.celyDen})
+                {votes.prijezd
+                  ? `Přijedu na celý den (${votes.prijezd.celyDen})`
+                  : 'Načítání...'}
               </button>
             </div>
             <div className="option">
               <button onClick={() => handleVote('prijezd', 'neprijdu')}>
-                Nepřijedu ({votes.prijezd.neprijdu})
+                {votes.prijezd
+                  ? `Nepřijdu (${votes.prijezd.neprijdu})`
+                  : 'Načítání...'}
               </button>
             </div>
           </div>
@@ -62,17 +91,23 @@ export const Program = () => {
           <div className="options">
             <div className="option">
               <button onClick={() => handleVote('spani', 'ne')}>
-                Nebudu spát ({votes.spani.ne})
+                {votes.spani
+                  ? `Nebudu spát (${votes.spani.ne})`
+                  : 'Načítání...'}
               </button>
             </div>
             <div className="option">
               <button onClick={() => handleVote('spani', 'autoStan')}>
-                Budu spát zadarmo v autě/stanu ({votes.spani.autoStan})
+                {votes.spani
+                  ? `Budu spát zadarmo v autě/stanu (${votes.spani.autoStan})`
+                  : 'Načítání...'}
               </button>
             </div>
             <div className="option">
               <button onClick={() => handleVote('spani', 'zaplatim')}>
-                Zaplatím si ubytování na místě ({votes.spani.zaplatim})
+                {votes.spani
+                  ? `Zaplatím si ubytování na místě (${votes.spani.zaplatim})`
+                  : 'Načítání...'}
               </button>
             </div>
           </div>
@@ -84,7 +119,9 @@ export const Program = () => {
           <div className="options">
             <div className="option">
               <button onClick={() => handleVote('jidlo', 'vegetarian')}>
-                Jsem vegetarián ({votes.jidlo.vegetarian})
+                {votes.jidlo
+                  ? `Jsem vegetarián (${votes.jidlo.vegetarian})`
+                  : 'Načítání...'}
               </button>
             </div>
           </div>
@@ -93,3 +130,5 @@ export const Program = () => {
     </section>
   );
 };
+
+export default Program;
