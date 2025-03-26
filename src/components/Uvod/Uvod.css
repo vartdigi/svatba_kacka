@@ -11,7 +11,7 @@
   height: auto;
   background-attachment: fixed;
   background-size: cover;
-  margin-left: 30px;
+
   margin-top: 60px;
 
 
@@ -36,7 +36,7 @@
 
 .lineUvod img {
   position: absolute;
-  margin-left: 30px;
+
 
 }
 
@@ -55,7 +55,7 @@
   width: 100%;
   height: auto;
   margin-top: 40px;
-  margin-left: 15px;
+
 }
 
 .zelenKolecko img {
