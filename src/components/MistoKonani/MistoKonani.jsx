@@ -14,7 +14,7 @@ export const MistoKonani = () => {
           <p>
             Jestliže máte tenhle odkaz, chceme Vás na naší svatbě, která se
             uskuteční 12.7.2025 ve 14h v Hotelu Selský dvůr v Biskoupkách (u
-            Zbirohu).Parkování je zajištěné v areálů a je zdarma.
+            Zbirohu).Parkování je zajištěné v areálu a je zdarma.
           </p>
         </div>
 
