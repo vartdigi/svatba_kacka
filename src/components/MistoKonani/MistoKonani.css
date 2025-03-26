@@ -68,3 +68,12 @@
     padding-right: 20px;
   }
 }
+
+#Misto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
