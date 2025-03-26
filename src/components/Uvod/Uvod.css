@@ -42,7 +42,7 @@
 
 .termin img {
   width: 70%;
-  margin-left: 70px;
+
   margin-top: 20px;
   max-width: 500px;
 
@@ -58,17 +58,12 @@
 
 }
 
-.zelenKolecko img {
-  position: absolute;
-  width: 30%;
-  margin-left: 300px;
-  top: 35em
-}
+
 
 @media screen and (min-width: 969px) {
   .termin img {
     width: 70%;
-    margin-left: 300px;
+
     max-width: 500px;
 
   }
