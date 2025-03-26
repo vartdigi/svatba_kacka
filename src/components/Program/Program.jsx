@@ -4,7 +4,7 @@ export const Program = () => {
   return (
     <div className="program-container">
       <h1>
-        Ještě prosíme o vyplňování pár odpovědí, abychom mohli všechno lépe
+        Ještě prosíme o vyplnění pár odpovědí, abychom mohli všechno co nejlépe
         naplánovat.
       </h1>
       <a
